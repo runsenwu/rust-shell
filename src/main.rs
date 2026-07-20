@@ -47,18 +47,23 @@ fn main() {
 
                     // perm checking
                     for path in paths {
-                        let path_with_file = Path::new(&format!("{path}/{command}"));
+                        let temp_path = path.to_str().unwrap_or_default();
+
+                        let path_str = &format!("{}/{command}", temp_path);
+
+                        let path_with_file = Path::new(path_str);
+
                         if path_with_file.exists() {
-                            let permission = match fs::metadata(path_with_file) {
+                            let permission = match fs::metadata(&path_with_file) {
                                 Ok(mode) => mode.permissions().mode(),
                                 Err(_) => continue,
                             };
 
                             // if executable
-                            if permission & 0o111 == 0 {
+                            if permission & 0o111 != 0 {
                                 println!(
                                     "{command} is {}",
-                                    path_with_file.to_str().unwrap_or_default()
+                                    &path_with_file.to_str().unwrap_or_default()
                                 );
 
                                 found = true;
