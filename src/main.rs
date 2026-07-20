@@ -14,12 +14,14 @@ fn main() {
             .read_line(&mut input)
             .expect("Failed to read line");
 
-        let input = input.trim_end();
+        let input = input.trim();
 
-        if (input == "exit") {
+        if input == "exit" {
             break;
+        } else if input.starts_with("echo ") {
+            println!(&string[5..]);
+        } else {
+            println!("{input}: command not found");
         }
-
-        println!("{input}: command not found");
     }
 }
