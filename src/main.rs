@@ -1,3 +1,4 @@
+use is_executable::IsExecutable;
 use std::fs::{self, Permissions};
 #[allow(unused_imports)]
 use std::io::{self, Write};
@@ -52,7 +53,7 @@ fn main() {
                             };
 
                             // if executable
-                            if permission & 0o111 != 0 {
+                            if permission & 0o111 == 0 {
                                 println!(
                                     "{command} is {}",
                                     path_with_file.to_str().unwrap_or_default()
