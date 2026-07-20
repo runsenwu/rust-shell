@@ -1,19 +1,21 @@
+use std;
 #[allow(unused_imports)]
 use std::io::{self, Write};
-use std;
 
 fn main() {
-    print!("$ ");
+    while (true) {
+        print!("$ ");
 
-    io::stdout().flush().unwrap();
+        io::stdout().flush().unwrap();
 
-    let mut input = String::new();
+        let mut input = String::new();
 
-    io::stdin().read_line(&mut input).expect("Failed to read line");
+        io::stdin()
+            .read_line(&mut input)
+            .expect("Failed to read line");
 
-    let input = input.trim_end();
+        let input = input.trim_end();
 
-    print!("{input}: command not found");
-
-    return;
+        println!("{input}: command not found");
+    }
 }
