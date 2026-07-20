@@ -28,6 +28,8 @@ fn main() {
             let command = &input[5..];
             if commands.contains(command) {
                 println!("{command} is a shell builtin");
+            } else {
+                println!("{command}: not found")
             }
         } else {
             println!("{input}: command not found");
