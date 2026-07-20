@@ -43,6 +43,8 @@ fn main() {
                 } else {
                     let paths = env::split_paths(&test);
 
+                    let mut found = false;
+
                     // perm checking
                     for path in paths {
                         let path_with_file = Path::new("{path}/{command}");
@@ -58,8 +60,16 @@ fn main() {
                                     "{command} is {}",
                                     path_with_file.to_str().unwrap_or_default()
                                 );
+
+                                found = true;
+
+                                break;
                             }
                         }
+                    }
+
+                    if (!found) {
+                        println!("{command}: not found");
                     }
                 }
             }
