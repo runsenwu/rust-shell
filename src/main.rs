@@ -16,6 +16,10 @@ fn main() {
 
         let input = input.trim_end();
 
+        if (input == "exit") {
+            break;
+        }
+
         println!("{input}: command not found");
     }
 }
