@@ -19,7 +19,7 @@ fn main() {
         if input == "exit" {
             break;
         } else if input.starts_with("echo ") {
-            println!(&string[5..]);
+            println!("{}", &input[5..]);
         } else {
             println!("{input}: command not found");
         }
