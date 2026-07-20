@@ -50,9 +50,7 @@ fn main() {
                         let temp_path = path.to_str().unwrap_or_default();
 
                         let path_str = &format!("{}/{command}", temp_path);
-
                         let path_with_file = Path::new(path_str);
-
                         if path_with_file.exists() {
                             let permission = match fs::metadata(&path_with_file) {
                                 Ok(mode) => mode.permissions().mode(),
