@@ -32,6 +32,7 @@ fn main() {
         } else if input.starts_with("echo ") {
             println!("{}", &input[5..]);
         } else if input.starts_with("type ") {
+            // all of these things can go into functions, instead of all living in main
             let command = &input[5..].trim();
             if commands.contains(command) {
                 println!("{command} is a shell builtin");
@@ -48,9 +49,9 @@ fn main() {
                     // perm checking
                     for path in paths {
                         let temp_path = path.to_str().unwrap_or_default();
-
                         let path_str = &format!("{}/{command}", temp_path);
                         let path_with_file = Path::new(path_str);
+
                         if path_with_file.exists() {
                             let permission = match fs::metadata(&path_with_file) {
                                 Ok(mode) => mode.permissions().mode(),
