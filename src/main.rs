@@ -47,9 +47,9 @@ fn main() {
 
                     // perm checking
                     for path in paths {
-                        let path_with_file = Path::new("{path}/{command}");
+                        let path_with_file = Path::new(&format!("{path}/{command}"));
                         if path_with_file.exists() {
-                            let permission = match fs::metadata(path) {
+                            let permission = match fs::metadata(path_with_file) {
                                 Ok(mode) => mode.permissions().mode(),
                                 Err(_) => continue,
                             };
