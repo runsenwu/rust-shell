@@ -34,6 +34,8 @@ fn main() {
         if command == "exit" {
             break;
         } else if command == "echo" {
+            let original_echo = &input[4..].trim();
+            println!("{original_echo}");
         } else if command == "type" {
             if rest.len() == 0 || rest.len() > 1 {
                 command_not_found(command);
