@@ -45,7 +45,7 @@ fn main() {
                 if found {
                     println!("{result}");
                 } else {
-                    command_not_found(command);
+                    command_not_found(command_to_find);
                 }
             }
         } else {
