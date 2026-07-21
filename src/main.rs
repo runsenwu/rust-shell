@@ -35,12 +35,18 @@ fn main() {
         } else if command == "echo" {
             println!("{}", command);
         } else if command == "type" {
-            // all of these things can go into functions, instead of all living in main
-            let (found, result) = is_executable(command);
-            if found {
-                println!("{result}");
-            } else {
+            let rest: Vec<&str> = args.collect();
+            if rest.len() == 0 || rest.len() > 1 {
                 command_not_found(command);
+            } else {
+                // all of these things can go into functions, instead of all living in main
+                let command_to_find = rest[0];
+                let (found, result) = is_executable(command_to_find);
+                if found {
+                    println!("{result}");
+                } else {
+                    command_not_found(command);
+                }
             }
         } else {
             let (found, _) = is_executable(command);
