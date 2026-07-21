@@ -25,37 +25,28 @@ fn main() {
             .read_line(&mut input)
             .expect("Failed to read line");
 
-        let input = input.trim();
-
-        let dirs: Vec<&str> = vec![];
+        let mut args = input.split_whitespace();
+        let command = args.next().unwrap();
 
         // I think all of these could be stored within a type of some kind as a switch case
         // to match against
-        if input == "exit" {
+        if command == "exit" {
             break;
-        } else if input.starts_with("echo ") {
-            println!("{}", &input[5..]);
-        } else if input.starts_with("type ") {
+        } else if command == "echo" {
+            println!("{}", command);
+        } else if command == "type" {
             // all of these things can go into functions, instead of all living in main
-            let command = &input[5..].trim();
             let (found, result) = is_executable(command);
-
             if found {
                 println!("{result}");
             } else {
                 command_not_found(command);
             }
         } else {
-            let mut splits = input.split_whitespace();
-
-            let throw: Vec<&str> = splits.clone().collect();
-
-            let command = splits.next().unwrap();
-
-            let (found, result) = is_executable(command);
+            let (found, _) = is_executable(command);
 
             if found {
-                match Command::new(command).args(splits).status() {
+                match Command::new(command).args(args).status() {
                     Ok(_) => {}
                     Err(_) => println!("Execution failed"),
                 }
