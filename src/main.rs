@@ -27,15 +27,14 @@ fn main() {
 
         let mut args = input.split_whitespace();
         let command = args.next().unwrap();
+        let rest: Vec<&str> = args.collect();
 
         // I think all of these could be stored within a type of some kind as a switch case
         // to match against
         if command == "exit" {
             break;
         } else if command == "echo" {
-            println!("{}", command);
         } else if command == "type" {
-            let rest: Vec<&str> = args.collect();
             if rest.len() == 0 || rest.len() > 1 {
                 command_not_found(command);
             } else {
@@ -52,7 +51,7 @@ fn main() {
             let (found, _) = is_executable(command);
 
             if found {
-                match Command::new(command).args(args).status() {
+                match Command::new(command).args(rest).status() {
                     Ok(_) => {}
                     Err(_) => println!("Execution failed"),
                 }
